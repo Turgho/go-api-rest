@@ -7,9 +7,10 @@ import (
 
 type Participants struct {
 	ID               string `json:"id"`
-	TripId           string `json:"trip_id"`
-	EmailsToInviteID string `json:"emails_to_invite_id"`
+	TripId           string `json:"-"`
+	EmailsToInviteID string `json:"-"`
 	Name             string `json:"name"`
+	Email            string `json:"email"`
 	IsConfirmed      int    `json:"is_confirmed"`
 }
 
@@ -45,25 +46,36 @@ func (repo *ParticipantsRepository) CreateParticipants(participant *Participants
 	return nil
 }
 
-func (repo *ParticipantsRepository) FindParticipantsFromTrip(tripID string) (*Participants, error) {
+func (repo *ParticipantsRepository) FindParticipantsFromTrip(tripID string) ([]Participants, error) {
 	query := `
-		SELECT p.id, p.name, p.is_confirmed, e.email
-        FROM participants as p
-        JOIN emails_to_invite as e
-		ON e.id = p.emails_to_invite_id
-        WHERE p.trip_id = $1
+		SELECT p.id, p.trip_id, p.emails_to_invite_id, p.name, e.email, p.is_confirmed
+		FROM participants as p
+		JOIN emails_to_invite as e ON e.id = p.emails_to_invite_id
+		WHERE p.trip_id = $1
 	`
-	var participant Participants
-	row := repo.DB.QueryRow(query, tripID)
 
-	if err := row.Scan(&participant.ID, &participant.TripId, &participant.EmailsToInviteID, &participant.Name, &participant.IsConfirmed); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, fmt.Errorf("viagem ou participante não encontrada com ID da viagem: %s", tripID)
+	rows, err := repo.DB.Query(query, tripID)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao encontrar links: %w", err)
+	}
+	defer rows.Close()
+
+	var participants []Participants
+	for rows.Next() {
+		var participant Participants
+
+		if err := rows.Scan(&participant.ID, &participant.TripId, &participant.EmailsToInviteID, &participant.Name, &participant.Email, &participant.IsConfirmed); err != nil {
+			return nil, fmt.Errorf("erro ao escanear participants: %w", err)
 		}
-		return nil, fmt.Errorf("erro ao encontrar participante: %w", err)
+
+		participants = append(participants, participant)
 	}
 
-	return &participant, nil
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("erro ao iterar sobre as linhas: %w", err)
+	}
+
+	return participants, nil
 }
 
 func (repo *ParticipantsRepository) UpdateParticipant(participantID string) error {

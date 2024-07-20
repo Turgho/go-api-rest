@@ -70,7 +70,7 @@ func InviteParticipant(c *gin.Context) {
 }
 
 func FindParticipants(c *gin.Context) {
-	tripID := c.Param("id")
+	tripID := c.Param("tripID")
 
 	if _, err := uuid.Parse(tripID); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ID de viagem inválido"})
@@ -85,4 +85,22 @@ func FindParticipants(c *gin.Context) {
 
 	log.Print("Participantes encontrado.")
 	c.JSON(http.StatusOK, participant)
+}
+
+func ConfirmParticipant(c *gin.Context) {
+	participantID := c.Param("participantID")
+	tripID := c.Param("tripID")
+
+	if _, err := uuid.Parse(tripID); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "ID de viagem inválido"})
+		return
+	}
+
+	if err := participantsRepo.UpdateParticipant(participantID); err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+
+	log.Print("Participante confirmado.")
+	c.JSON(http.StatusOK, gin.H{"message": "Participante confirmado."})
 }

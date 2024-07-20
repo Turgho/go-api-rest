@@ -22,10 +22,12 @@ func StartServer() {
 	tripRepo := repositories.NewTripRepository(dbHandler.DB)
 	emailRepo := repositories.NewEmailsRepository(dbHandler.DB)
 	participantRepo := repositories.NewParticipantsRepository(dbHandler.DB)
+	linkRepo := repositories.NewLinksRepository(dbHandler.DB)
 
 	// Inicializa os controladores dos repostórios
 	controllers.InitializeTripRepo(tripRepo)
 	controllers.InitializePartiRepo(participantRepo, emailRepo)
+	controllers.InitializeLinksRepo(linkRepo)
 
 	// Inicializa o servidor e as rotas
 	r := gin.Default()

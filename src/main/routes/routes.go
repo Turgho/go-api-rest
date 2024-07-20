@@ -12,9 +12,14 @@ func SetupRoutes(r *gin.Engine) {
 	// Trips Routes
 	r.POST("/trips", controllers.CreateTrip)
 	r.PUT("/trips/:id/confirm", controllers.UpdateTrip)
-	r.GET("trips/:id", controllers.FindTrip)
+	r.GET("/trips/:id", controllers.FindTrip)
+	r.POST("/trips/:id/invite", controllers.InviteParticipant)
 
 	// Participants Routes
-	r.POST("trips/:id/invite", controllers.InviteParticipant)
-	r.GET("participants/:tripID", controllers.FindParticipants)
+	r.GET("/participants/:tripID", controllers.FindParticipants)
+	r.PUT("/participants/:tripID/:participantID", controllers.ConfirmParticipant)
+
+	// Links Routes
+	r.POST("/trips/:id/links", controllers.RegistryLinks)
+	r.GET("/trips/:id/links", controllers.FindLinks)
 }
