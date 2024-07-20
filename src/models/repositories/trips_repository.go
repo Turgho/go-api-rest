@@ -72,7 +72,7 @@ func (repo *TripRepository) FindTripByID(tripID string) (*Trip, error) {
 	return &trip, nil
 }
 
-func (repo *TripRepository) UpdateTrip(trip_id string) error {
+func (repo *TripRepository) UpdateTrip(tripID string) error {
 	// Query SQL
 	query := `
 		UPDATE 
@@ -85,7 +85,7 @@ func (repo *TripRepository) UpdateTrip(trip_id string) error {
 
 	_, err := repo.DB.Exec(
 		query,
-		trip_id,
+		tripID,
 	)
 
 	// Erro ao atualizar Viagem no DB

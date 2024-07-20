@@ -18,12 +18,14 @@ func StartServer() {
 	}
 	defer dbHandler.Close()
 
-	// Configura o repositório de viagens
+	// Configura o repositório
 	tripRepo := repositories.NewTripRepository(dbHandler.DB)
-	emailsRepo := repositories.NewEmailsRepository(dbHandler.DB)
+	emailRepo := repositories.NewEmailsRepository(dbHandler.DB)
+	participantRepo := repositories.NewParticipantsRepository(dbHandler.DB)
 
+	// Inicializa os controladores dos repostórios
 	controllers.InitializeTripRepo(tripRepo)
-	controllers.IniciatilizeEmailsRepo(emailsRepo)
+	controllers.InitializePartiRepo(participantRepo, emailRepo)
 
 	// Inicializa o servidor e as rotas
 	r := gin.Default()
