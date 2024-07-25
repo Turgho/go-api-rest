@@ -5,7 +5,7 @@ import (
 
 	"github.com/Turgho/Go-Api-Rest/src/controllers"
 	"github.com/Turgho/Go-Api-Rest/src/main/routes"
-	repositories "github.com/Turgho/Go-Api-Rest/src/models/repositories"
+	repo "github.com/Turgho/Go-Api-Rest/src/models/repositories"
 	"github.com/Turgho/Go-Api-Rest/src/models/settings"
 	"github.com/gin-gonic/gin"
 )
@@ -19,15 +19,17 @@ func StartServer() {
 	defer dbHandler.Close()
 
 	// Configura o repositório
-	tripRepo := repositories.NewTripRepository(dbHandler.DB)
-	emailRepo := repositories.NewEmailsRepository(dbHandler.DB)
-	participantRepo := repositories.NewParticipantsRepository(dbHandler.DB)
-	linkRepo := repositories.NewLinksRepository(dbHandler.DB)
+	tripRepo := repo.NewTripRepository(dbHandler.DB)
+	emailRepo := repo.NewEmailsRepository(dbHandler.DB)
+	participantRepo := repo.NewParticipantsRepository(dbHandler.DB)
+	linkRepo := repo.NewLinksRepository(dbHandler.DB)
+	activityRepo := repo.NewActivitiesRepository(dbHandler.DB)
 
 	// Inicializa os controladores dos repostórios
 	controllers.InitializeTripRepo(tripRepo)
 	controllers.InitializePartiRepo(participantRepo, emailRepo)
 	controllers.InitializeLinksRepo(linkRepo)
+	controllers.InitializeActivitiesRepo(activityRepo)
 
 	// Inicializa o servidor e as rotas
 	r := gin.Default()

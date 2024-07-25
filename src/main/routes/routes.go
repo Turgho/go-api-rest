@@ -22,4 +22,8 @@ func SetupRoutes(r *gin.Engine) {
 	// Links Routes
 	r.POST("/trips/:id/links", controllers.RegistryLinks)
 	r.GET("/trips/:id/links", controllers.FindLinks)
+
+	// Activities Routes
+	r.POST("/trips/:id/activities", controllers.RegistryActivity)
+	r.GET("/trips/:id/activities", controllers.FindAcitivies)
 }
