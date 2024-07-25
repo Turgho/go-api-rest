@@ -8,15 +8,17 @@ import (
 	_ "github.com/lib/pq" // O underscore importa o pacote apenas para seus efeitos colaterais (registro do driver)
 )
 
-// Settings para conexão do DB
-const connStr = "user=postgres dbname=postgres sslmode=disable password=password"
-
 type DBConnectionHanddler struct {
 	DB *sql.DB
 }
 
+const connStr = "port=5432 user=postgres password=password dbname=postgres sslmode=disable"
+
 // Conecta o DB
 func DBConnect() (*DBConnectionHanddler, error) {
+	// Settings para conexão do DB
+	fmt.Println(connStr)
+
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, fmt.Errorf("erro ao abrir conexão ao banco de dados: %w", err)

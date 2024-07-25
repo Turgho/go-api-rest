@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  go_db:
+    image: postgres:13
+    container_name: go_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+
+  go_app:
+    build: .
+    container_name: go_app
+    depends_on:
+      - go_db
+    environment:
+      DB_HOST: go_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_NAME: postgres
+    ports:
+      - "5050:5050"
+    command: ["./main"]
+
+volumes:
+  db_data:
