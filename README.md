@@ -52,8 +52,9 @@ O servidor local será criado na porta `http://localhost:5050/`.
         "end_date": "2024-10-20",
         "owner_name": "John Doe",
         "owner_email": "john.doe@example.com"
-        }
-
+        } 
+    ```
+    ```json
         // Response
         {
             "id": "uuid"
@@ -100,7 +101,8 @@ O servidor local será criado na porta `http://localhost:5050/`.
                 "marcos@gmail.com"
             ]
         }
-
+    ```
+    ```json
         // Response
         {
             "message": "Participantes convidados"
@@ -152,7 +154,8 @@ O servidor local será criado na porta `http://localhost:5050/`.
                 "Hotel 2"
             ]
         }
-
+    ```
+    ```json
         // Response
         {
             "message": "Links registrados."
@@ -189,7 +192,8 @@ O servidor local será criado na porta `http://localhost:5050/`.
             "title": "Comprar itens",
             "occurs_at": "2024-10-11 13:30:00"
         }
-
+    ```
+    ```json
         // Response
         {
             "activity_id": "uuid"
