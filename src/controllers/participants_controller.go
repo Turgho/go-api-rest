@@ -66,7 +66,7 @@ func InviteParticipant(c *gin.Context) {
 	}
 
 	log.Print("Participante criado.")
-	c.JSON(http.StatusOK, gin.H{"message": "Participantes criados"})
+	c.JSON(http.StatusOK, gin.H{"message": "Participantes convidados"})
 }
 
 func FindParticipants(c *gin.Context) {
@@ -102,5 +102,5 @@ func ConfirmParticipant(c *gin.Context) {
 	}
 
 	log.Print("Participante confirmado.")
-	c.JSON(http.StatusOK, gin.H{"message": "Participante confirmado."})
+	c.JSON(http.StatusOK, gin.H{"message": "Participante(s) confirmado."})
 }

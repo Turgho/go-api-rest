@@ -70,5 +70,5 @@ func UpdateTrip(c *gin.Context) {
 
 	// Retorna a viagem atualizada
 	log.Print("Viagem atualizada.")
-	c.JSON(http.StatusOK, gin.H{"id": tripID})
+	c.JSON(http.StatusOK, gin.H{"id": tripID, "status": 1})
 }

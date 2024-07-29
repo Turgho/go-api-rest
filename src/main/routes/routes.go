@@ -16,8 +16,8 @@ func SetupRoutes(r *gin.Engine) {
 	r.POST("/api/trips/:id/invite", controllers.InviteParticipant)
 
 	// Participants Routes
-	r.GET("//apiparticipants/:tripID", controllers.FindParticipants)
-	r.PUT("/participants/:tripID/:participantID", controllers.ConfirmParticipant)
+	r.GET("/api/participants/:tripID", controllers.FindParticipants)
+	r.PUT("/api/participants/:tripID/:participantID", controllers.ConfirmParticipant)
 
 	// Links Routes
 	r.POST("/api/trips/:id/links", controllers.RegistryLinks)
