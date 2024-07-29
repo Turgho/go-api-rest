@@ -1,13 +1,3 @@
--- init.sql
-
--- Cria o banco de dados (se não existir)
-CREATE DATABASE my_database;
-
-
--- Conecta ao banco de dados
-\c my_database;
-
-
 -- Criação de tabelas
 CREATE TABLE IF NOT EXISTS trips (
     id UUID PRIMARY KEY,

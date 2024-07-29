@@ -12,8 +12,7 @@ services:
       - "5433:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./init:/docker-entrypoint-initdb.d/init.sql
-    restart: always
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
 
   go_app:
     build: .
@@ -25,7 +24,7 @@ services:
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: password
-      DB_NAME: postgres
+      DB_NAME: go_db
     ports:
       - "5050:5050"
     command: ["./main"]

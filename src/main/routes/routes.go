@@ -7,23 +7,23 @@ import (
 
 func SetupRoutes(r *gin.Engine) {
 	// Root
-	r.GET("/", controllers.Index)
+	r.GET("/api/", controllers.Index)
 
 	// Trips Routes
-	r.POST("/trips", controllers.CreateTrip)
-	r.PUT("/trips/:id/confirm", controllers.UpdateTrip)
-	r.GET("/trips/:id", controllers.FindTrip)
-	r.POST("/trips/:id/invite", controllers.InviteParticipant)
+	r.POST("/api/trips", controllers.CreateTrip)
+	r.PUT("/api/trips/:id/confirm", controllers.UpdateTrip)
+	r.GET("/api/trips/:id", controllers.FindTrip)
+	r.POST("/api/trips/:id/invite", controllers.InviteParticipant)
 
 	// Participants Routes
-	r.GET("/participants/:tripID", controllers.FindParticipants)
+	r.GET("//apiparticipants/:tripID", controllers.FindParticipants)
 	r.PUT("/participants/:tripID/:participantID", controllers.ConfirmParticipant)
 
 	// Links Routes
-	r.POST("/trips/:id/links", controllers.RegistryLinks)
-	r.GET("/trips/:id/links", controllers.FindLinks)
+	r.POST("/api/trips/:id/links", controllers.RegistryLinks)
+	r.GET("/api/trips/:id/links", controllers.FindLinks)
 
 	// Activities Routes
-	r.POST("/trips/:id/activities", controllers.RegistryActivity)
-	r.GET("/trips/:id/activities", controllers.FindAcitivies)
+	r.POST("/api/trips/:id/activities", controllers.RegistryActivity)
+	r.GET("/api/trips/:id/activities", controllers.FindAcitivies)
 }

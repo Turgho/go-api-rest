@@ -12,7 +12,7 @@ type DBConnectionHanddler struct {
 	DB *sql.DB
 }
 
-const connStr = "port=5432 user=postgres password=password dbname=postgres sslmode=disable"
+const connStr = "host=go_db port=5432 user=postgres password=password dbname=postgres sslmode=disable"
 
 // Conecta o DB
 func DBConnect() (*DBConnectionHanddler, error) {
