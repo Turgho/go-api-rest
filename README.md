@@ -20,7 +20,7 @@ Antes de você começar a usar a API, tenha certeza de ter os requistos em sua m
 - PostgreSQL DataBase
 - DBeaver (opcional, ou qualquer gerenciador de DataBases)
 - Docker & Docker Compose
-- Postman (optional, ou qualquer app de requisição HTTP)
+- Postman (opcional, ou qualquer app de requisição HTTP)
 
 ### *Instalação*
 
@@ -74,7 +74,7 @@ O servidor local será criado na porta `http://localhost:5050/`.
             "status": 0
         }
     ```
-    - `PUT - api/trips/:id`
+- `PUT - api/trips/:id`
         Confirma uma viagem.
     ```json
         // Response
@@ -128,7 +128,7 @@ O servidor local será criado na porta `http://localhost:5050/`.
     ```
 
 - `PUT - /api/participants/:tripID/:participantID`
-    Confirma um participante de uma viagem
+        Confirma um participante de uma viagem
     ```json
         // Response
         {
@@ -160,7 +160,7 @@ O servidor local será criado na porta `http://localhost:5050/`.
     ```
 
 - `GET - /api/trips/:id/links`
-    Retorna os links de uma viagem
+        Retorna os links de uma viagem
     ```json
         // Response
         [
@@ -182,7 +182,7 @@ O servidor local será criado na porta `http://localhost:5050/`.
 ### Atividades
 
 - `POST - /api/trips/:id/activities`
-    Cria atividades de uma viagem
+        Cria atividades de uma viagem
     ```json
         // Resquest
         {
@@ -197,7 +197,7 @@ O servidor local será criado na porta `http://localhost:5050/`.
     ```
 
 - `GET - /api/trips/:id/activities`
-    Retorna atividades de uma viagem
+        Retorna atividades de uma viagem
     ```json
         // Response
         [
